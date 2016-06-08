@@ -6,9 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import sistema.dao.DisciplinaDAO;
-import sistema.modelos.Aluno;
 import sistema.modelos.Disciplina;
-import sistema.modelos.Conteudo;
+//import sistema.modelos.Conteudo;
 
 public class DisciplinaService {
 
@@ -21,7 +20,7 @@ public class DisciplinaService {
 		return disciplina;
 	}
 
-	public List<Disciplina> getDisciplinaes() {
+	public List<Disciplina> getDisciplinas() {
 		List<Disciplina> list = disciplinaDAO.getAll(Disciplina.class);
 		disciplinaDAO.closeEntityManager();
 		return list;
@@ -36,26 +35,24 @@ public class DisciplinaService {
 
 	public void remover(Disciplina disciplina) {
 
-		disciplina = disciplinaDAO.getById(Disciplina.class, disciplina.getCodigo());
+		disciplina = disciplinaDAO.getById(Disciplina.class, disciplina.getidDisciplina());
 		disciplinaDAO.remove(disciplina);
 		disciplinaDAO.closeEntityManager();
 	}
 
 	public Disciplina pesquisar(Disciplina disciplina) {
 
-		disciplina = disciplinaDAO.getById(Disciplina.class, disciplina.getCodigo());
+		disciplina = disciplinaDAO.getById(Disciplina.class, disciplina.getidDisciplina());
 		disciplinaDAO.closeEntityManager();
 		return disciplina;
 	}
 
-	public List<Conteudo> pesquisarConteudosDisciplina(Disciplina disciplina) {
+/*	public List<Conteudo> pesquisarConteudosDisciplina(Disciplina disciplina) {
 
 		List<Conteudo> conteudos;
 		disciplina = disciplinaDAO.getById(Disciplina.class, disciplina.getCodigo());
 		conteudos = disciplina.getConteudos();
 		return conteudos;
 	}
-
-	
-
+*/
 }

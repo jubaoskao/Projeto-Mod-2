@@ -7,6 +7,8 @@ import javax.persistence.Query;
 
 import sistema.dao.ProfessorDAO;
 import sistema.modelos.Professor;
+import sistema.modelos.Disciplina;
+import sistema.modelos.Professor;
 
 
 public class ProfessorService {
@@ -39,6 +41,14 @@ public class ProfessorService {
 		professor = professorDAO.getById(Professor.class, professor.getMatricula());
 		professorDAO.remove(professor);
 		professorDAO.closeEntityManager();
+	}
+	
+	public List<Disciplina> pesquisarDisciplinasProfessor(Professor professor) {
+
+		List<Disciplina> disciplinas;
+		professor = professorDAO.getById(Professor.class, professor.getMatricula());
+		disciplinas = professor.getDisciplinas();
+		return disciplinas;
 	}
 	
 }

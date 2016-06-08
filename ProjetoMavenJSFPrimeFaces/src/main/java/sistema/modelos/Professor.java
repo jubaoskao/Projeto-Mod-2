@@ -1,12 +1,14 @@
 package sistema.modelos;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Professor implements Serializable{
@@ -17,6 +19,21 @@ public class Professor implements Serializable{
 	
 	private String nome;
 	private String curso;
+
+	@OneToMany(mappedBy="professor")
+	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+	
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+	
+	public void addDisciplina(Disciplina disciplina)
+	{
+		disciplinas.add(disciplina);
+	}
 	
 	public int getMatricula() {
 		return matricula;
@@ -36,9 +53,6 @@ public class Professor implements Serializable{
 	public void setCurso(String curso) {
 		this.curso = curso;
 	}
-	
-	
-	
 	
 	@Override
 	public int hashCode() {

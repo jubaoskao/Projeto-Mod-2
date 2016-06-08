@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -18,14 +19,23 @@ public class Disciplina implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long idDisciplina;
+	private int idDisciplina;
 	private String nome;
 	
-	@OneToMany(mappedBy="disciplina")
-	private List<Conteudo> conteudos = new ArrayList<Conteudo>();
+	@ManyToOne
+	private Professor professor;
 	
+	//@OneToMany(mappedBy="disciplina")
+	//private List<Conteudo> conteudos = new ArrayList<Conteudo>();
 	
-	public Disciplina(long idDisciplina, String nome) {
+	public Professor getProfessor() {
+		return professor;
+	}
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+	
+	public Disciplina(int idDisciplina, String nome) {
 		super();
 		this.idDisciplina = idDisciplina;
 		this.nome = nome;
@@ -34,10 +44,10 @@ public class Disciplina implements Serializable{
 	public Disciplina() {
 	}
 	
-	public long getidDisciplina() {
+	public int getidDisciplina() {
 		return idDisciplina;
 	}
-	public void setidDisciplina(long idDisciplina) {
+	public void setidDisciplina(int idDisciplina) {
 		this.idDisciplina = idDisciplina;
 	}
 	public String getNome() {
@@ -46,7 +56,7 @@ public class Disciplina implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public List<Conteudo> getConteudos() {
+	/*public List<Conteudo> getConteudos() {
 		return conteudos;
 	}
 	public void setConteudos(List<Conteudo> conteudos) {
@@ -56,7 +66,7 @@ public class Disciplina implements Serializable{
 	public void addConteudo(Conteudo produto)
 	{
 		conteudos.add(produto);	
-	}
+	}*/
 
 	@Override
 	public int hashCode() {
