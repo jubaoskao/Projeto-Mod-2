@@ -7,7 +7,6 @@ import javax.persistence.Query;
 
 import sistema.dao.DisciplinaDAO;
 import sistema.modelos.Disciplina;
-//import sistema.modelos.Conteudo;
 
 public class DisciplinaService {
 
@@ -46,13 +45,4 @@ public class DisciplinaService {
 		disciplinaDAO.closeEntityManager();
 		return disciplina;
 	}
-
-/*	public List<Conteudo> pesquisarConteudosDisciplina(Disciplina disciplina) {
-
-		List<Conteudo> conteudos;
-		disciplina = disciplinaDAO.getById(Disciplina.class, disciplina.getCodigo());
-		conteudos = disciplina.getConteudos();
-		return conteudos;
-	}
-*/
 }

@@ -8,7 +8,6 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.RowEditEvent;
 
-import sistema.modelos.Aluno;
 import sistema.modelos.Fornecedor;
 import sistema.modelos.Produto;
 import sistema.service.FornecedorService;
@@ -44,7 +43,6 @@ public class ProdutoManagedBean  implements Serializable{
 
 	public List<Fornecedor> getFornecedores() {
 		return fornService.getFornecedores();
-
 	}
 
 	public Fornecedor getFornecedor() {
