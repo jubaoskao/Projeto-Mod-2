@@ -12,103 +12,105 @@
 		<h:outputText value="#{msg['pages.cadastroProfessor.title']}" />
 	</ui:define>
 	
-
 	<ui:define name="principal">
-	  
-	  <h1><p:outputLabel value="#{msg['pages.cadastroProfessor.menu']}"/></h1>
-	  
-	  <h:form id="formProfessor">	
-	  <p:panelGrid columns="2">
-      <p:outputLabel value="#{msg['pages.cadastroProfessor.nome']}" />
-      <p:inputText value="#{professorManagedBean.professor.nome}"/>
-      <p:outputLabel value="#{msg['pages.cadastroProfessor.curso']}" />
-      <p:inputText value="#{professorManagedBean.professor.curso}"/>
-	  </p:panelGrid>
-	  <p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" 
-	                 action="#{professorManagedBean.salvar}"
-	                 update=":formProfessor, :formTableProfessor:tabelaProfessor"
-	                 />
-       </h:form>
+	
+	<h1><p:outputLabel value="#{msg['pages.cadastroProfessor.menu']}" /> </h1>
+ 	<h:form id="formProfessors">
 
-   <br/>
-   
-   
-   <h3><p:outputLabel value="#{msg['pages.cadastroProfessor.tableTitle']}" /> </h3>
-   <h:form id="formTableProfessor">
-   
-    <p:dataTable
-                value="#{professorManagedBean.professors}"
-                var="aux"
-                id="tabelaProfessor"
-            
-                editable="true"
-            
-                paginator="true"
-                rows="5"
-                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                rowsPerPageTemplate="5,10,15"
-                
-                emptyMessage="#{msg['pages.cadastroProfessor.filterMSG']}"
-                
-   >
-      
-      <p:ajax event="rowEdit" listener="#{professorManagedBean.onRowEdit}" update="tabelaProfessor" />
-      
-      <p:column headerText="#{msg['pages.cadastroProfessor.matricula']}" filterBy="#{aux.matricula}">
-        <p:outputLabel value="#{aux.matricula}" />
-      </p:column>
-      
-      
-      
-      <p:column headerText="#{msg['pages.cadastroProfessor.nome']}" filterBy="#{aux.nome}">
+		<p:panelGrid columns="2">
+			<p:outputLabel value="#{msg['pages.cadastroProfessor.descricao']}" />
+			<p:inputText value="#{professorManagedBean.professor.descricao}" />
+
+			<p:outputLabel value="#{msg['pages.cadastroProfessor.disciplina.nome']}" />
+			<p:selectOneMenu value="#{professorManagedBean.disciplina}"
+				converter="converterDisciplina">
+				<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroProfessor.disciplina.msg']}" />
+				<f:selectItems value="#{professorManagedBean.disciplinaes}" var="aux"
+					itemValue="#{aux}" itemLabel="#{aux.nome}" />
+			</p:selectOneMenu>
+
+
+			<p:outputLabel value="#{msg['pages.cadastroProfessor.valor']}" />
+			<p:inputText value="#{professorManagedBean.professor.valor}" />
+
+
+		</p:panelGrid>
+		<p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" action="#{professorManagedBean.salvar}"
+			update=":formProfessors, :formTableProfessors" />
+	</h:form>
+
+    <h3><p:outputLabel value="#{msg['pages.cadastroProfessor.tableTitle']}" /> </h3>
     
-    			<p:cellEditor>
+	<h:form id="formTableProfessors">
+	
+	
+	    
+		<p:dataTable value="#{professorManagedBean.professors}" var="prod"
+			editable="true" id="tableProfessors">
+
+            <p:ajax event="rowEdit" listener="#{professorManagedBean.onRowEdit}" update="tableProfessors"/>
+
+			<p:column headerText="#{msg['pages.cadastroProfessor.codigo']}">
+				<h:outputText value="#{prod.codigo}" />
+			</p:column>
+
+			<p:column headerText="#{msg['pages.cadastroProfessor.descricao']}">
+				<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.nome}" />
+						<p:outputLabel value="#{prod.descricao}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="professorNome" value="#{aux.nome}"
+						<p:inputText id="descricao" value="#{prod.descricao}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
-	  </p:column>
-    
-      <p:column headerText="#{msg['pages.cadastroProfessor.curso']}" filterBy="#{aux.curso}">
-     
-     			<p:cellEditor>
+			</p:column>
+
+
+			<p:column headerText="#{msg['pages.cadastroProfessor.disciplina.nome']}">
+				<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.curso}" />
+						<p:outputLabel value="#{prod.disciplina.nome}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="professorCurso" value="#{aux.curso}"
-							style="width:100%" />
+						<p:selectOneMenu value="#{prod.disciplina}"
+							converter="converterDisciplina" style="width:100%">
+							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroProfessor.disciplina.msg']}" />
+							<f:selectItems value="#{professorManagedBean.disciplinaes}"
+								var="aux" itemValue="#{aux}" itemLabel="#{aux.nome}" />
+						</p:selectOneMenu>
+
 					</f:facet>
 				</p:cellEditor>
-      </p:column>
-      
-      <p:column style="width:70px" headerText="#{msg['pages.cadastroProfessor.optionTable']}">
-					
+			</p:column>
+
+			<p:column headerText="#{msg['pages.cadastroProfessor.valor']}">
+				  <p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{prod.valor}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="valor" value="#{prod.valor}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style="width:70px" headerText="#{msg['pages.commus.form.opcoes']}">
+
+
+
 					<p:rowEditor />
 					
 					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
 						style="text-align:center"
-						actionListener="#{professorManagedBean.remover(aux)}"
-						update="tabelaProfessor" />
-	  </p:column>
+						actionListener="#{professorManagedBean.remove(prod)}"
+						update=":formTableProfessors" />
 
-      
-      
-   </p:dataTable>	
 
+
+			</p:column>
+		</p:dataTable>
 	</h:form>
 
-	
-   	   
 	</ui:define>
 </ui:composition>
-
-
-
-
-
-

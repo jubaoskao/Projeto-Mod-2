@@ -1,0 +1,107 @@
+
+<ui:composition template="templateMenu.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui2="http://java.sun.com/jsf/facelets"
+	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
+	
+	<ui:define name="title">
+		<h:outputText value="#{msg['pages.cadastroVerdadeiroFalso.title']}" />
+	</ui:define>
+	
+
+	<ui:define name="principal">
+	  
+	  <h1><p:outputLabel value="#{msg['pages.cadastroVerdadeiroFalso.menu']}"/></h1>
+	  
+	  <h:form id="formVerdadeiroFalso">	
+	  <p:panelGrid columns="2">
+      <p:outputLabel value="#{msg['pages.cadastroVerdadeiroFalso.nome']}" />
+      <p:inputText value="#{verdadeiroFalsoManagedBean.verdadeiroFalso.nome}"/>
+      <p:outputLabel value="#{msg['pages.cadastroVerdadeiroFalso.curso']}" />
+      <p:inputText value="#{verdadeiroFalsoManagedBean.verdadeiroFalso.curso}"/>
+	  </p:panelGrid>
+	  <p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" 
+	                 action="#{verdadeiroFalsoManagedBean.salvar}"
+	                 update=":formVerdadeiroFalso, :formTableVerdadeiroFalso:tabelaVerdadeiroFalso"
+	                 />
+       </h:form>
+
+   <br/>
+   
+   
+   <h3><p:outputLabel value="#{msg['pages.cadastroVerdadeiroFalso.tableTitle']}" /> </h3>
+   <h:form id="formTableVerdadeiroFalso">
+   
+    <p:dataTable
+                value="#{verdadeiroFalsoManagedBean.verdadeiroFalsos}"
+                var="aux"
+                id="tabelaVerdadeiroFalso"
+            
+                editable="true"
+            
+                paginator="true"
+                rows="5"
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="5,10,15"
+                
+                emptyMessage="#{msg['pages.cadastroVerdadeiroFalso.filterMSG']}"
+                
+   >
+      
+      <p:ajax event="rowEdit" listener="#{verdadeiroFalsoManagedBean.onRowEdit}" update="tabelaVerdadeiroFalso" />
+      
+      <p:column headerText="#{msg['pages.cadastroVerdadeiroFalso.matricula']}" filterBy="#{aux.matricula}">
+        <p:outputLabel value="#{aux.matricula}" />
+      </p:column>
+      
+      
+      
+      <p:column headerText="#{msg['pages.cadastroVerdadeiroFalso.nome']}" filterBy="#{aux.nome}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.nome}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="verdadeiroFalsoNome" value="#{aux.nome}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+    
+      <p:column headerText="#{msg['pages.cadastroVerdadeiroFalso.curso']}" filterBy="#{aux.curso}">
+     
+     			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.curso}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="verdadeiroFalsoCurso" value="#{aux.curso}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+      </p:column>
+      
+      <p:column style="width:70px" headerText="#{msg['pages.cadastroVerdadeiroFalso.optionTable']}">
+					
+					<p:rowEditor />
+					
+					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
+						style="text-align:center"
+						actionListener="#{verdadeiroFalsoManagedBean.remover(aux)}"
+						update="tabelaVerdadeiroFalso" />
+	  </p:column>
+   </p:dataTable>	
+	</h:form>   
+	</ui:define>
+</ui:composition>
+
+
+
+
+
+

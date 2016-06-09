@@ -56,8 +56,7 @@ public class Fornecedor implements Serializable{
 	
 	public void addProduto(Produto produto)
 	{
-		produtos.add(produto);
-		
+		produtos.add(produto);	
 	}
 	
 

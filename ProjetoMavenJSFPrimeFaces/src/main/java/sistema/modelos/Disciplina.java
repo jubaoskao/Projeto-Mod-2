@@ -22,17 +22,22 @@ public class Disciplina implements Serializable{
 	private int idDisciplina;
 	private String nome;
 	
-	@ManyToOne
-	private Professor professor;
+	@OneToMany(mappedBy="disciplina")
+	private List<Professor> professors = new ArrayList<Professor>();
 	
 	//@OneToMany(mappedBy="disciplina")
 	//private List<Conteudo> conteudos = new ArrayList<Conteudo>();
 	
-	public Professor getProfessor() {
-		return professor;
+	public List<Professor> getProfessors() {
+		return professors;
 	}
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
+	public void setProfessors(List<Professor> professors) {
+		this.professors = professors;
+	}
+	
+	public void addProfessor(Professor professor)
+	{
+		professors.add(professor);	
 	}
 	
 	public Disciplina(int idDisciplina, String nome) {
@@ -63,9 +68,9 @@ public class Disciplina implements Serializable{
 		this.conteudos = conteudos;
 	}
 	
-	public void addConteudo(Conteudo produto)
+	public void addConteudo(Conteudo professor)
 	{
-		conteudos.add(produto);	
+		conteudos.add(professor);	
 	}*/
 
 	@Override

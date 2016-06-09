@@ -1,35 +1,63 @@
 package sistema.beans;
 
+import java.io.Serializable;
 import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
 import org.primefaces.event.RowEditEvent;
+
+import sistema.modelos.Aluno;
+import sistema.modelos.Disciplina;
 import sistema.modelos.Professor;
+import sistema.service.DisciplinaService;
 import sistema.service.ProfessorService;
 
-@ManagedBean
+@ManagedBean(name = "professorManagedBean")
 @ViewScoped
-public class ProfessorManagedBean {
+public class ProfessorManagedBean  implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Professor professor = new Professor();
-	private List<Professor> professores;
-	private ProfessorService service = new ProfessorService();
-
-	// Edição de um professor na tabela
-	public void onRowEdit(RowEditEvent event) {
-
-		Professor a = ((Professor) event.getObject());
-		service.alterar(a);
-	}
+	private Disciplina disciplina;
+	private ProfessorService prodService = new ProfessorService();
+	private DisciplinaService fornService = new DisciplinaService();
+	private List<Professor> professors;
 
 	public void salvar() {
-		professor = service.salvar(professor);
+		disciplina.addProfessor(professor);
+		professor.setDisciplina(disciplina);
 
-		if (professores != null)
-			professores.add(professor);
+		professor = prodService.salvar(professor);
+
+		if (professors != null)
+			professors.add(professor);
 
 		professor = new Professor();
+		disciplina = null;
 
+	}
+
+	public List<Disciplina> getDisciplinaes() {
+		return fornService.getDisciplinas();
+
+	}
+
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void remove(Professor professor) {
+		prodService.remover(professor);
+		professors.remove(professor);
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 
 	public Professor getProfessor() {
@@ -40,18 +68,17 @@ public class ProfessorManagedBean {
 		this.professor = professor;
 	}
 
-	// Retorna a lista de professores para a tabela
 	public List<Professor> getProfessors() {
-		if (professores == null)
-			professores = service.getProfessors();
+		if (professors == null)
+			professors = prodService.getProfessors();
 
-		return professores;
+		return professors;
 	}
 
-	public void remover(Professor professor) {
-		service.remover(professor);
-		professores.remove(professor);
+	public void onRowEdit(RowEditEvent event) {
 
+		Professor p = ((Professor) event.getObject());
+		prodService.alterar(p);
 	}
 
 }

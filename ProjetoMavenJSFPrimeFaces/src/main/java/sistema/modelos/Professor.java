@@ -1,66 +1,66 @@
 package sistema.modelos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Professor implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int matricula;
+	private int codigo;
+	private String descricao;
+	private double valor;
 	
-	private String nome;
-	private String curso;
-
-	@OneToMany(mappedBy="professor")
-	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+	@ManyToOne
+	private Disciplina disciplina;
 	
-	public List<Disciplina> getDisciplinas() {
-		return disciplinas;
-	}
-	public void setDisciplinas(List<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
-	}
 	
-	public void addDisciplina(Disciplina disciplina)
-	{
-		disciplinas.add(disciplina);
+	public Disciplina getDisciplina() {
+		return disciplina;
 	}
-	
-	public int getMatricula() {
-		return matricula;
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
-	public void setMatricula(int matricula) {
-		this.matricula = matricula;
+	public int getCodigo() {
+		return codigo;
 	}
-	public String getNome() {
-		return nome;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public String getDescricao() {
+		return descricao;
 	}
-	public String getCurso() {
-		return curso;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-	public void setCurso(String curso) {
-		this.curso = curso;
+	public double getValor() {
+		return valor;
+	}
+	public void setValor(double valor) {
+		this.valor = valor;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + matricula;
+		result = prime * result + (int) (codigo ^ (codigo >>> 32));
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(valor);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -70,19 +70,19 @@ public class Professor implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Professor other = (Professor) obj;
-		if (matricula != other.matricula)
+		if (codigo != other.codigo)
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (Double.doubleToLongBits(valor) != Double.doubleToLongBits(other.valor))
 			return false;
 		return true;
 	}
 	
-	@Override
-	public String toString() {
-		return "Professor [matricula=" + matricula + ", nome=" + nome + ", curso=" + curso + "]";
-	}
-	
-	
-	
-	
+		
 	
 
 }
