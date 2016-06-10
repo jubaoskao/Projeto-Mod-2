@@ -34,7 +34,7 @@ public class PerguntaManagedBean {
 		return serialVersionUID;
 	}
 	public List<Disciplina> getDisciplinas() {
-		List<Disciplina> p = dservice.getDisciplinas();
+		/*List<Disciplina> p = dservice.getDisciplinas();
 		if(p.size() == 0)
 		{
 			Professor p1 = new Professor();
@@ -58,10 +58,11 @@ public class PerguntaManagedBean {
 			p.add(d2);
 			p.add(d3);
 		}
-		return p;
+		return p;*/
+		return dservice.getDisciplinas();
 	}
 	public List<Conteudo> getConteudos() {
-		List<Conteudo> p = cservice.getConteudos();
+		/*List<Conteudo> p = cservice.getConteudos();
 		if(p.size() == 0)
 		{
 			Conteudo d1 = new Conteudo();
@@ -78,7 +79,8 @@ public class PerguntaManagedBean {
 			p.add(d2);
 			p.add(d3);
 		}
-		return p;
+		return p;*/
+		return cservice.getConteudos();
 	}
 
 	public Conteudo getConteudo() {

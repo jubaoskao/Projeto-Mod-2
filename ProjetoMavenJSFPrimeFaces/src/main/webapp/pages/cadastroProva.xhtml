@@ -56,8 +56,8 @@
       
       <p:ajax event="rowEdit" listener="#{provaManagedBean.onRowEdit}" update="tabelaProva" />
       
-      <p:column headerText="#{msg['pages.cadastroProva.idProva']}" filterBy="#{aux.matricula}">
-        <p:outputLabel value="#{aux.matricula}" />
+      <p:column headerText="#{msg['pages.cadastroProva.idProva']}" filterBy="#{aux.idProva}">
+        <p:outputLabel value="#{aux.idProva}" />
       </p:column>
       
       
@@ -75,6 +75,7 @@
 				</p:cellEditor>
 	  </p:column>
     
+  
       <p:column headerText="#{msg['pages.cadastroProva.duracao']}" filterBy="#{aux.duracao}">
      
      			<p:cellEditor>
@@ -87,6 +88,20 @@
 					</f:facet>
 				</p:cellEditor>
       </p:column>
+      
+        	 <p:column headerText="#{msg['pages.cadastroProva.nivelProva']}" filterBy="#{aux.nivelProva}">
+    
+    			<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.nivelProva}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="provaNivel" value="#{aux.nivelProva}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+	  </p:column>
+    
       
       <p:column style="width:70px" headerText="#{msg['pages.cadastroProva.optionTable']}">
 					

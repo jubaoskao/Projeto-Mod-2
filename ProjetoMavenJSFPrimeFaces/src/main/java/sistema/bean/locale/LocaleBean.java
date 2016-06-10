@@ -26,5 +26,4 @@ public class LocaleBean {
         locale = new Locale(language);
         FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
     }
-
 }

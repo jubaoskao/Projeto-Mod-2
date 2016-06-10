@@ -1,6 +1,7 @@
 package sistema.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -24,8 +25,17 @@ public class ProvaService {
 	public List <Prova> getProvas()
 	{
 		List <Prova> list = provaDAO.getAll(Prova.class);
+		List<Prova> aux = new ArrayList<Prova>();
+		for(Prova x : list)
+		{
+			if (x.getNome() != "")
+			{
+				aux.add(x);
+			}
+				
+		}
 		provaDAO.closeEntityManager();
-		return list;
+		return aux;
 	}
 
 	public void alterar(Prova prova) {

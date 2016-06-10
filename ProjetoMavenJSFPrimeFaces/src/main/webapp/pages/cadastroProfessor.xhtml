@@ -29,11 +29,6 @@
 					itemValue="#{aux}" itemLabel="#{aux.nome}" />
 			</p:selectOneMenu>
 
-
-			<p:outputLabel value="#{msg['pages.cadastroProfessor.valor']}" />
-			<p:inputText value="#{professorManagedBean.professor.valor}" />
-
-
 		</p:panelGrid>
 		<p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" action="#{professorManagedBean.salvar}"
 			update=":formProfessors, :formTableProfessors" />
@@ -80,17 +75,6 @@
 								var="aux" itemValue="#{aux}" itemLabel="#{aux.nome}" />
 						</p:selectOneMenu>
 
-					</f:facet>
-				</p:cellEditor>
-			</p:column>
-
-			<p:column headerText="#{msg['pages.cadastroProfessor.valor']}">
-				  <p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{prod.valor}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="valor" value="#{prod.valor}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>

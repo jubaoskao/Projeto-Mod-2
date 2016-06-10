@@ -11,12 +11,17 @@ import javax.persistence.Id;
 @Entity
 public class Alternativa implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int matricula;
 	
 	private String nome;
-	private String curso;
+	private String resposta;
 	
 	public int getMatricula() {
 		return matricula;
@@ -30,11 +35,11 @@ public class Alternativa implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCurso() {
-		return curso;
+	public String getResposta() {
+		return resposta;
 	}
-	public void setCurso(String curso) {
-		this.curso = curso;
+	public void setResposta(String resposta) {
+		this.resposta = resposta;
 	}
 	
 	
@@ -63,7 +68,7 @@ public class Alternativa implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Alternativa [matricula=" + matricula + ", nome=" + nome + ", curso=" + curso + "]";
+		return "Alternativa [matricula=" + matricula + ", nome=" + nome + ", resposta=" + resposta + "]";
 	}
 	
 	
