@@ -27,7 +27,8 @@ public class ProvaManagedBean {
 		prova = service.salvar(prova);
 
 		if (provas != null)
-			provas.add(prova);
+			if (prova.getNome() != "")
+				provas.add(prova);
 
 		prova = new Prova();
 
