@@ -1,11 +1,18 @@
 package sistema.beans;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.primefaces.event.RowEditEvent;
 
+import sistema.modelos.Conteudo;
+import sistema.modelos.Disciplina;
+import sistema.modelos.PDFWithText;
+import sistema.modelos.Pergunta;
 import sistema.modelos.Prova;
+import sistema.service.PerguntaService;
 import sistema.service.ProvaService;
 
 @ManagedBean
@@ -14,7 +21,11 @@ public class ProvaManagedBean {
 
 	private Prova prova = new Prova();
 	private List<Prova> provas;
+	private Disciplina disciplina;
+	private Conteudo conteudo;
 	private ProvaService service = new ProvaService();
+	private PerguntaService pservice = new PerguntaService();
+	private PerguntaManagedBean perg = new PerguntaManagedBean();
 
 	// Edição de um prova na tabela
 	public void onRowEdit(RowEditEvent event) {
@@ -23,6 +34,22 @@ public class ProvaManagedBean {
 		service.alterar(a);
 	}
 
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
+	
+	public Conteudo getConteudo() {
+		return conteudo;
+	}
+
+	public void setConteudo(Conteudo conteudo) {
+		this.conteudo = conteudo;
+	}
+	
 	public void salvar() {
 		prova = service.salvar(prova);
 
@@ -32,6 +59,16 @@ public class ProvaManagedBean {
 		prova = new Prova();
 
 	}
+	
+	public void gerar(Prova prova) throws IOException
+	{
+		int count = 1;
+		PDFWithText p  = new PDFWithText();
+		
+		List<Pergunta> lista = pservice.getPerguntas();
+		p.createPDF(lista, prova.getNome(), prova.getQtdePerguntas());
+		prova = new Prova();
+	}	
 
 	public Prova getProva() {
 		return prova;

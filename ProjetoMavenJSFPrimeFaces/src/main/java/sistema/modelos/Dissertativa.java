@@ -17,7 +17,7 @@ public class Dissertativa implements Serializable{
 	private int matricula;
 	
 	private String nome;
-	private String curso;
+	private String resposta;
 	
 	public int getMatricula() {
 		return matricula;
@@ -31,11 +31,11 @@ public class Dissertativa implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCurso() {
-		return curso;
+	public String getResposta() {
+		return resposta;
 	}
-	public void setCurso(String curso) {
-		this.curso = curso;
+	public void setResposta(String resposta) {
+		this.resposta = resposta;
 	}
 	
 	
@@ -64,7 +64,7 @@ public class Dissertativa implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Dissertativa [matricula=" + matricula + ", nome=" + nome + ", curso=" + curso + "]";
+		return "Dissertativa [matricula=" + matricula + ", nome=" + nome + ", resposta=" + resposta + "]";
 	}
 	
 	

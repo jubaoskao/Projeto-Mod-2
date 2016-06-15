@@ -6,7 +6,9 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.RowEditEvent;
 
 import sistema.modelos.Alternativa;
+import sistema.modelos.Pergunta;
 import sistema.service.AlternativaService;
+import sistema.service.PerguntaService;
 
 @ManagedBean
 @ViewScoped
@@ -14,7 +16,28 @@ public class AlternativaManagedBean {
 
 	private Alternativa alternativa = new Alternativa();
 	private List<Alternativa> alternativas;
+	private Pergunta pergunta;
 	private AlternativaService service = new AlternativaService();
+	private PerguntaService pserv = new PerguntaService();
+
+	public List<Pergunta> getPerguntas()
+	{
+		return pserv.getPerguntas();
+	}
+	
+	
+	
+	public Pergunta getPergunta() {
+		return pergunta;
+	}
+
+
+
+	public void setPergunta(Pergunta pergunta) {
+		this.pergunta = pergunta;
+	}
+
+
 
 	// Edição de um alternativa na tabela
 	public void onRowEdit(RowEditEvent event) {

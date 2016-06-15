@@ -20,8 +20,10 @@ public class Pergunta {
 	private String Titulo;
 	private int VezesUtilizadas;
 	private int nivel;
+	
 	@ManyToMany
 	private ArrayList<Conteudo> Conteudos = new ArrayList<Conteudo>();
+	
 	@ManyToOne
 	private Prova Prova = new Prova();
 	

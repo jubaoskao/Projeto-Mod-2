@@ -21,8 +21,8 @@
 	  <p:panelGrid columns="2">
       <p:outputLabel value="#{msg['pages.cadastroVerdadeiroFalso.nome']}" />
       <p:inputText value="#{verdadeiroFalsoManagedBean.verdadeiroFalso.nome}"/>
-      <p:outputLabel value="#{msg['pages.cadastroVerdadeiroFalso.curso']}" />
-      <p:inputText value="#{verdadeiroFalsoManagedBean.verdadeiroFalso.curso}"/>
+      <p:outputLabel value="#{msg['pages.cadastroVerdadeiroFalso.resposta']}" />
+      <p:inputText value="#{verdadeiroFalsoManagedBean.verdadeiroFalso.resposta}"/>
 	  </p:panelGrid>
 	  <p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" 
 	                 action="#{verdadeiroFalsoManagedBean.salvar}"
@@ -73,14 +73,14 @@
 				</p:cellEditor>
 	  </p:column>
     
-      <p:column headerText="#{msg['pages.cadastroVerdadeiroFalso.curso']}" filterBy="#{aux.curso}">
+      <p:column headerText="#{msg['pages.cadastroVerdadeiroFalso.resposta']}" filterBy="#{aux.resposta}">
      
      			<p:cellEditor>
 					<f:facet name="output">
-						<p:outputLabel value="#{aux.curso}" />
+						<p:outputLabel value="#{aux.resposta}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText id="verdadeiroFalsoCurso" value="#{aux.curso}"
+						<p:inputText id="verdadeiroFalsoResposta" value="#{aux.resposta}"
 							style="width:100%" />
 					</f:facet>
 				</p:cellEditor>

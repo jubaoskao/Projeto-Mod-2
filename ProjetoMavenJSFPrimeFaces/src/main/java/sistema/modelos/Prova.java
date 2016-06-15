@@ -1,12 +1,14 @@
 package sistema.modelos;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Prova implements Serializable{
@@ -18,7 +20,14 @@ public class Prova implements Serializable{
 	private String nome;
 	private int duracao;
 	private int nivelProva;
+	private int qtdePerguntas;
 	
+	public int getQtdePerguntas() {
+		return qtdePerguntas;
+	}
+	public void setQtdePerguntas(int qtdePerguntas) {
+		this.qtdePerguntas = qtdePerguntas;
+	}
 	public int getIdProva() {
 		return idProva;
 	}

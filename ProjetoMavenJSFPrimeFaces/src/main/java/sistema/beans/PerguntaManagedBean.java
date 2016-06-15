@@ -5,6 +5,10 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import sistema.modelos.Aluno;
 import sistema.modelos.Conteudo;
@@ -34,55 +38,32 @@ public class PerguntaManagedBean {
 		return serialVersionUID;
 	}
 	public List<Disciplina> getDisciplinas() {
-		/*List<Disciplina> p = dservice.getDisciplinas();
-		if(p.size() == 0)
-		{
-			Professor p1 = new Professor();
-			p1.setDescricao("Glaucao");
-			pservice.salvar(p1);
-			
-			Disciplina d1 = new Disciplina();
-			Disciplina d2 = new Disciplina();
-			Disciplina d3 = new Disciplina();
-			
-			d1.setNome("POOI");
-			d1.addProfessor(p1);
-			d2.setNome("POOII");
-			d2.addProfessor(p1);
-			d3.setNome("CompGrafica");
-			d3.addProfessor(p1);
-			dservice.salvar(d1);
-			dservice.salvar(d2);
-			dservice.salvar(d3);
-			p.add(d1);
-			p.add(d2);
-			p.add(d3);
-		}
-		return p;*/
 		return dservice.getDisciplinas();
 	}
 	public List<Conteudo> getConteudos() {
-		/*List<Conteudo> p = cservice.getConteudos();
-		if(p.size() == 0)
-		{
-			Conteudo d1 = new Conteudo();
-			Conteudo d2 = new Conteudo();
-			Conteudo d3 = new Conteudo();
-			
-			d1.setNome("Java");
-			d2.setNome("JSF");
-			d3.setNome("JPA");
-			cservice.salvar(d1);
-			cservice.salvar(d2);
-			cservice.salvar(d3);
-			p.add(d1);
-			p.add(d2);
-			p.add(d3);
-		}
-		return p;*/
 		return cservice.getConteudos();
 	}
 
+	public List<Pergunta> getPerguntas(Disciplina d, Conteudo c, int quant)
+	{
+		Pergunta p = new Pergunta();
+		
+		EntityManagerFactory emf= Persistence.createEntityManagerFactory("ProjetoMavenJSFPrimeFaces");
+		EntityManager em = emf.createEntityManager( );
+		
+		Query q = em.createQuery("SELECT c FROM Pergunta AS c where c.Titulo != ?1 and c.disciplina.Id = ?2");
+		q.setParameter(1,"").setParameter(2, d.getidDisciplina());
+		q.setMaxResults(quant);
+	   
+		@SuppressWarnings("unchecked")
+		List<Pergunta> lista = q.getResultList();
+	    
+		em.close();
+	    emf.close();
+	    
+	    return lista;		
+	}
+	
 	public Conteudo getConteudo() {
 		return conteudo;
 	}

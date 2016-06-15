@@ -19,8 +19,13 @@
 	  
 	  <h:form id="formAlternativa">	
 	  <p:panelGrid columns="2">
-      <p:outputLabel value="#{msg['pages.cadastroAlternativa.nome']}" />
-      <p:inputText value="#{alternativaManagedBean.alternativa.nome}"/>
+	   <p:outputLabel value="Pergunta" />
+      <p:selectOneMenu value="#{alternativaManagedBean.pergunta}"
+					converter="converterPergunta">
+					<f:selectItem itemValue="" itemLabel="Pergunta" />
+					<f:selectItems value="#{alternativaManagedBean.perguntas}" var="aux"
+						itemValue="#{aux}" itemLabel="#{aux.titulo}" />
+				</p:selectOneMenu>
       <p:outputLabel value="#{msg['pages.cadastroAlternativa.resposta']}" />
       <p:inputText value="#{alternativaManagedBean.alternativa.resposta}"/>
 	  </p:panelGrid>
@@ -57,21 +62,6 @@
       <p:column headerText="#{msg['pages.cadastroAlternativa.matricula']}" filterBy="#{aux.matricula}">
         <p:outputLabel value="#{aux.matricula}" />
       </p:column>
-      
-      
-      
-      <p:column headerText="#{msg['pages.cadastroAlternativa.nome']}" filterBy="#{aux.nome}">
-    
-    			<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.nome}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="alternativaNome" value="#{aux.nome}"
-							style="width:100%" />
-					</f:facet>
-				</p:cellEditor>
-	  </p:column>
     
       <p:column headerText="#{msg['pages.cadastroAlternativa.resposta']}" filterBy="#{aux.resposta}">
      
