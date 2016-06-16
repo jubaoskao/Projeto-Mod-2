@@ -19,7 +19,8 @@
 	  <h:form id="formPergunta">	
 	  <p:panelGrid columns="2">
 		      <p:outputLabel value="Titulo" />
-		      <p:inputText value="#{perguntaManagedBean.pergunta.titulo}"/>
+		      
+		      <h:inputTextarea  row="15" col="40" value="#{perguntaManagedBean.pergunta.titulo}"/>
 		      <p:outputLabel value="Disciplina" />
 				<p:selectOneMenu value="#{perguntaManagedBean.disciplina}"
 					converter="converterDisciplina">
