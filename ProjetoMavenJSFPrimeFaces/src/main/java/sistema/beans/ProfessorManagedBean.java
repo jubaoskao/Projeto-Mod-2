@@ -25,7 +25,7 @@ public class ProfessorManagedBean  implements Serializable{
 	private Professor professor = new Professor();
 	private Disciplina disciplina;
 	private ProfessorService prodService = new ProfessorService();
-	private DisciplinaService fornService = new DisciplinaService();
+	private DisciplinaService discService = new DisciplinaService();
 	private List<Professor> professors;
 
 	public void salvar() {
@@ -43,7 +43,7 @@ public class ProfessorManagedBean  implements Serializable{
 	}
 
 	public List<Disciplina> getDisciplinaes() {
-		return fornService.getDisciplinas();
+		return discService.getDisciplinas();
 
 	}
 

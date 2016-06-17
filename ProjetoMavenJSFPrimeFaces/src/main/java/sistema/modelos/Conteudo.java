@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Conteudo implements Serializable{
@@ -18,6 +19,15 @@ public class Conteudo implements Serializable{
 	private String nome;
 	private String curso;
 	
+	@ManyToOne
+	private Disciplina disciplina;
+	
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
 	public int getMatricula() {
 		return matricula;
 	}

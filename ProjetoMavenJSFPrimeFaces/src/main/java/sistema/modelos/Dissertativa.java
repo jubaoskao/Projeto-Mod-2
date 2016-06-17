@@ -1,12 +1,13 @@
 package sistema.modelos;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Dissertativa implements Serializable{
@@ -18,6 +19,16 @@ public class Dissertativa implements Serializable{
 	
 	private String nome;
 	private String resposta;
+	
+	@ManyToMany
+	private ArrayList<Pergunta> Perguntas = new ArrayList<Pergunta>();
+	
+	public ArrayList<Pergunta> getPerguntas() {
+		return Perguntas;
+	}
+	public void setPerguntas(ArrayList<Pergunta> perguntas) {
+		Perguntas = perguntas;
+	}
 	
 	public int getMatricula() {
 		return matricula;

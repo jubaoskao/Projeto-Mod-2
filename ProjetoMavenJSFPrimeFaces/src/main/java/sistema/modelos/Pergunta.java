@@ -27,6 +27,15 @@ public class Pergunta {
 	@ManyToOne
 	private Prova Prova = new Prova();
 	
+	@ManyToOne
+	private Disciplina disciplina = new Disciplina();
+	
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
 	public ArrayList<Conteudo> getConteudos() {
 		return Conteudos;
 	}

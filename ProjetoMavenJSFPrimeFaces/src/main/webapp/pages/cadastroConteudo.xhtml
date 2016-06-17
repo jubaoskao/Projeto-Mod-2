@@ -21,7 +21,16 @@
 	  <p:panelGrid columns="2">
       <p:outputLabel value="#{msg['pages.cadastroConteudo.nome']}" />
       <p:inputText value="#{conteudoManagedBean.conteudo.nome}"/>
-      <p:outputLabel value="#{msg['pages.cadastroConteudo.curso']}" />
+      
+		<p:outputLabel value="#{msg['pages.cadastroConteudo.disciplina.nome']}" />
+			<p:selectOneMenu value="#{conteudoManagedBean.disciplina}"
+				converter="converterDisciplina">
+				<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
+				<f:selectItems value="#{conteudoManagedBean.disciplinaes}" var="aux"
+					itemValue="#{aux}" itemLabel="#{aux.nome}" />
+			</p:selectOneMenu>
+			
+		<p:outputLabel value="#{msg['pages.cadastroConteudo.curso']}" />
       <p:inputText value="#{conteudoManagedBean.conteudo.curso}"/>
 	  </p:panelGrid>
 	  <p:commandButton value="#{msg['pages.comuns.form.btnSalvar']}" 
@@ -72,6 +81,23 @@
 					</f:facet>
 				</p:cellEditor>
 	  </p:column>
+    
+    	<p:column headerText="#{msg['pages.cadastroConteudo.disciplina.nome']}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.disciplina.nome}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:selectOneMenu value="#{aux.disciplina}"
+							converter="converterDisciplina" style="width:100%">
+							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroConteudo.disciplina.msg']}" />
+							<f:selectItems value="#{conteudoManagedBean.disciplinaes}"
+								var="f" itemValue="#{f}" itemLabel="#{f.nome}" />
+						</p:selectOneMenu>
+
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
     
       <p:column headerText="#{msg['pages.cadastroConteudo.curso']}" filterBy="#{aux.curso}">
      

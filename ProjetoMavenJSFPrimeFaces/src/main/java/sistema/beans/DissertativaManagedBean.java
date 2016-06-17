@@ -6,7 +6,10 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.RowEditEvent;
 
 import sistema.modelos.Dissertativa;
+import sistema.modelos.Pergunta;
 import sistema.service.DissertativaService;
+import sistema.service.PerguntaService;
+import sistema.service.VerdadeiroFalsoService;
 
 @ManagedBean
 @ViewScoped
@@ -15,7 +18,27 @@ public class DissertativaManagedBean {
 	private Dissertativa dissertativa = new Dissertativa();
 	private List<Dissertativa> dissertativas;
 	private DissertativaService service = new DissertativaService();
+	private Pergunta pergunta;
+	private PerguntaService pserv = new PerguntaService();
 
+	public List<Pergunta> getPerguntas()
+	{
+		return pserv.getPerguntas();
+	}
+	
+	
+	
+	public Pergunta getPergunta() {
+		return pergunta;
+	}
+
+
+
+	public void setPergunta(Pergunta pergunta) {
+		this.pergunta = pergunta;
+	}
+	
+	
 	// Edição de um dissertativa na tabela
 	public void onRowEdit(RowEditEvent event) {
 

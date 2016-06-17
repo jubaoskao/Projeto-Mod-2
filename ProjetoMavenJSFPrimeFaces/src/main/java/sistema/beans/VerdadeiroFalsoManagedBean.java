@@ -5,7 +5,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.primefaces.event.RowEditEvent;
 
+import sistema.modelos.Pergunta;
 import sistema.modelos.VerdadeiroFalso;
+import sistema.service.PerguntaService;
 import sistema.service.VerdadeiroFalsoService;
 
 @ManagedBean
@@ -14,8 +16,28 @@ public class VerdadeiroFalsoManagedBean {
 
 	private VerdadeiroFalso verdadeiroFalso = new VerdadeiroFalso();
 	private List<VerdadeiroFalso> verdadeiroFalsos;
+	private Pergunta pergunta;
+	private PerguntaService pserv = new PerguntaService();
 	private VerdadeiroFalsoService service = new VerdadeiroFalsoService();
 
+
+	public List<Pergunta> getPerguntas()
+	{
+		return pserv.getPerguntas();
+	}
+	
+	
+	
+	public Pergunta getPergunta() {
+		return pergunta;
+	}
+
+
+
+	public void setPergunta(Pergunta pergunta) {
+		this.pergunta = pergunta;
+	}
+	
 	// Edição de um verdadeiroFalso na tabela
 	public void onRowEdit(RowEditEvent event) {
 

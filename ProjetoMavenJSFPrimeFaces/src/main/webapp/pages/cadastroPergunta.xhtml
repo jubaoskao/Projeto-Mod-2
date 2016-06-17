@@ -55,6 +55,22 @@
       <p:column headerText="Nome">
         <p:outputLabel value="#{aux.titulo}" />
       </p:column>
+      <p:column headerText="Disciplina">
+				<p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.disciplina.nome}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:selectOneMenu value="#{aux.disciplina}"
+							converter="converterDisciplina" style="width:100%">
+							<f:selectItem itemValue="" itemLabel="Selecione uma Disciplina" />
+							<f:selectItems value="#{perguntaManagedBean.disciplinas}"
+								var="f" itemValue="#{f}" itemLabel="#{f.nome}" />
+						</p:selectOneMenu>
+
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
       
    </p:dataTable>	
 	   
