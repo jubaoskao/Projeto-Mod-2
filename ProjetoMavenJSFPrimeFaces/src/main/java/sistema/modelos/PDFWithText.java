@@ -16,6 +16,10 @@ public class PDFWithText {
     {
     	 Document doc = null;
         OutputStream os = null;
+        
+        if(perguntas.isEmpty())
+        	return;
+        
         try {
             doc = new Document(PageSize.A4, 72, 72, 72, 72);
             os = new FileOutputStream("C:\\Temp\\" + nome  + ".pdf");
