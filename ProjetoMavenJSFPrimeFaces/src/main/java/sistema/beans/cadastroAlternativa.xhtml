@@ -63,23 +63,6 @@
         <p:outputLabel value="#{aux.matricula}" />
       </p:column>
     
-    	<p:column headerText="#{msg['pages.cadastroAlternativa.pergunta.titulo']}">
-				<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.pergunta.titulo}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:selectOneMenu value="#{aux.pergunta}"
-							converter="converterPergunta" style="width:100%">
-							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroAlternativa.pergunta.msg']}" />
-							<f:selectItems value="#{alternativaManagedBean.perguntas}"
-								var="x" itemValue="#{x}" itemLabel="#{x.nome}" />
-						</p:selectOneMenu>
-
-					</f:facet>
-				</p:cellEditor>
-			</p:column>
-    
       <p:column headerText="#{msg['pages.cadastroAlternativa.resposta']}" filterBy="#{aux.resposta}">
      
      			<p:cellEditor>

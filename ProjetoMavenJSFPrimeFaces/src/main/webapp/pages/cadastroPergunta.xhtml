@@ -71,7 +71,19 @@
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
+      <p:column headerText="Nivel Pergunta">
+        <p:outputLabel value="#{aux.nivel}" />
+      </p:column>
       
+       <p:column style="width:70px" headerText="#{msg['pages.cadastroPergunta.optionTable']}">
+					
+					<p:rowEditor />
+					
+					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
+						style="text-align:center"
+						actionListener="#{perguntaManagedBean.remove(aux)}"
+						update="tabelaPergunta" />
+	  </p:column>  
    </p:dataTable>	
 	   
 	</ui:define>

@@ -28,13 +28,13 @@ public class Pergunta {
 	private Prova Prova = new Prova();
 	
 	@ManyToOne
-	private Disciplina disciplina = new Disciplina();
+	private Disciplina disciplina;
 	
-	public Disciplina getDisciplina() {
-		return disciplina;
-	}
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
+	}
+	public Disciplina getDisciplina() {
+		return disciplina;
 	}
 	public ArrayList<Conteudo> getConteudos() {
 		return Conteudos;

@@ -101,12 +101,10 @@
 				</p:cellEditor>
 	  		</p:column>
       
-		<p:column>   
-        	 <p:column headerText="Quantidade Perguntas" filterBy="#{aux.qtdePerguntas}">
+		 
+        	 <p:column headerText="#{msg['pages.cadastroProva.qtdePerguntas']}" filterBy="#{aux.qtdePerguntas}">
 						<p:outputLabel value="#{aux.qtdePerguntas}" />
 	  			</p:column>
-    	</p:column>
-    
       
       <p:column style="width:70px" headerText="#{msg['pages.cadastroProva.optionTable']}">
 					

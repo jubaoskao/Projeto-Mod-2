@@ -14,6 +14,7 @@ import sistema.modelos.Aluno;
 import sistema.modelos.Conteudo;
 import sistema.modelos.Disciplina;
 import sistema.modelos.Pergunta;
+import sistema.modelos.Produto;
 import sistema.modelos.Professor;
 import sistema.service.AlunoService;
 import sistema.service.ConteudoService;
@@ -29,6 +30,7 @@ public class PerguntaManagedBean {
 	private Pergunta pergunta = new Pergunta();
 	private Disciplina disciplina;
 	private Conteudo conteudo;
+	private List<Pergunta> perguntas;
 	private PerguntaService service = new PerguntaService();
 	private DisciplinaService dservice = new DisciplinaService();
 	private ConteudoService cservice = new ConteudoService();
@@ -44,6 +46,10 @@ public class PerguntaManagedBean {
 		return cservice.getConteudos();
 	}
 
+	public void setPerguntas(List<Pergunta> perguntas) {
+		this.perguntas = perguntas;
+	}
+	
 	public List<Pergunta> getPerguntas(Disciplina d, Conteudo c, int quant)
 	{
 		Pergunta p = new Pergunta();
@@ -88,6 +94,11 @@ public class PerguntaManagedBean {
 		return null;
 	}
 
+	public void remove(Pergunta pergunta) {
+		service.remover(pergunta);
+		perguntas.remove(pergunta);
+	}
+	
 	public Pergunta getPergunta() {
 		return pergunta;
 	}

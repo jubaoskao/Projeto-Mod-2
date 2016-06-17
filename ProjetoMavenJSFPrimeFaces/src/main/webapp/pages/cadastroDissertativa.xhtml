@@ -22,7 +22,7 @@
       <p:outputLabel value="#{msg['pages.cadastroDissertativa.pergunta']}" />
       <p:selectOneMenu value="#{dissertativaManagedBean.pergunta}"
 					converter="converterPergunta">
-					<f:selectItem itemValue="" itemLabel="{msg['pages.cadastroDissertativa.pergunta']}" />
+					<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroDissertativa.pergunta.msg']}" />
 					<f:selectItems value="#{dissertativaManagedBean.perguntas}" var="aux"
 						itemValue="#{aux}" itemLabel="#{aux.titulo}" />
 				</p:selectOneMenu>
@@ -61,24 +61,7 @@
       
       <p:column headerText="#{msg['pages.cadastroDissertativa.matricula']}" filterBy="#{aux.matricula}">
         <p:outputLabel value="#{aux.matricula}" />
-      </p:column>
-      
-      <p:column headerText="#{msg['pages.cadastroDissertativa.pergunta.titulo']}">
-				<p:cellEditor>
-					<f:facet name="output">
-						<p:outputLabel value="#{aux.pergunta.titulo}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:selectOneMenu value="#{aux.pergunta.titulo}"
-							converter="converterPergunta" style="width:100%">
-							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroAlternativa.pergunta.msg']}" />
-							<f:selectItems value="#{dissertativaManagedBean.perguntas}"
-								var="f" itemValue="#{f}" itemLabel="#{f.titulo}" />
-						</p:selectOneMenu>
-
-					</f:facet>
-				</p:cellEditor>
-			</p:column>
+      </p:column>  
       
       <p:column headerText="#{msg['pages.cadastroDissertativa.nome']}" filterBy="#{aux.nome}">
     
