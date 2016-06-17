@@ -14,29 +14,30 @@
 
 	<ui:define name="principal">
 	  
-	  <h1><p:outputLabel value="Cadastro Pergunta"/></h1>
+	 <h1><p:outputLabel value="#{msg['pages.cadastroPergunta.menu']}"/></h1>
 	  
 	  <h:form id="formPergunta">	
 	  <p:panelGrid columns="2">
-		      <p:outputLabel value="Titulo" />
+		      <p:outputLabel value="#{msg['pages.cadastroPergunta.Titulo']}" />
 		      
 		      <h:inputTextarea  row="15" col="40" value="#{perguntaManagedBean.pergunta.titulo}"/>
-		      <p:outputLabel value="Disciplina" />
+		      <p:outputLabel value="#{msg['pages.cadastroPergunta.disciplina.nome']}" />
 				<p:selectOneMenu value="#{perguntaManagedBean.disciplina}"
 					converter="converterDisciplina">
-					<f:selectItem itemValue="" itemLabel="Disciplina" />
+					<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroPergunta.disciplina.msg']}" />
 					<f:selectItems value="#{perguntaManagedBean.disciplinas}" var="aux"
 						itemValue="#{aux}" itemLabel="#{aux.nome}" />
 				</p:selectOneMenu>
 				
-				<p:outputLabel value="Conteudo" />
+				<p:outputLabel value="#{msg['pages.cadastroPergunta.conteudo.nome']}" />
 				<p:selectOneMenu value="#{perguntaManagedBean.conteudo}"
 					converter="converterConteudo">
-					<f:selectItem itemValue="" itemLabel="Conteudo" />
+					<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroPergunta.conteudo.msg']}" />
 					<f:selectItems value="#{perguntaManagedBean.conteudos}" var="aux"
 						itemValue="#{aux}" itemLabel="#{aux.nome}" />
 				</p:selectOneMenu>
-				<p:outputLabel value="Nivel" />
+				
+				<p:outputLabel value="#{msg['pages.cadastroPergunta.nivel']}" />
 		      	<p:inputText value="#{perguntaManagedBean.pergunta.nivel}"/>
 	  </p:panelGrid>
 	  <p:commandButton value="Salvar" 
@@ -44,18 +45,43 @@
 	                 update=":formPergunta, :tabelaPergunta"
 	                 />
        </h:form>
+       <br/>
 	
-   <p:dataTable value="#{perguntaManagedBean.perguntas}"
+   <p:dataTable
+                value="#{perguntaManagedBean.perguntas}"
                 var="aux"
                 id="tabelaPergunta"
+            
+                editable="true"
+            
+                paginator="true"
+                rows="5"
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="5,10,15"
+                
+                emptyMessage="#{msg['pages.cadastroProva.filterMSG']}"
+                
    >
-      <p:column headerText="Id">
-        <p:outputLabel value="#{aux.id}" />
+      
+      <p:ajax event="rowEdit" listener="#{perguntaManagedBean.onRowEdit}" update="tabelaPergunta" />
+   
+      <p:column headerText="#{msg['pages.cadastroPergunta.Id']}" filterBy="#{aux.id}">
+         <p:outputLabel value="#{aux.id}" />				
       </p:column>
-      <p:column headerText="Nome">
-        <p:outputLabel value="#{aux.titulo}" />
+      
+      <p:column headerText="#{msg['pages.cadastroPergunta.Titulo']}" filterBy="#{aux.titulo}">
+         <p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.titulo}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="perguntaTitulo" value="#{aux.titulo}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
       </p:column>
-      <p:column headerText="Disciplina">
+      
+      <p:column headerText="#{msg['pages.cadastroPergunta.disciplina.nome']}">
 				<p:cellEditor>
 					<f:facet name="output">
 						<p:outputLabel value="#{aux.disciplina.nome}" />
@@ -63,16 +89,24 @@
 					<f:facet name="input">
 						<p:selectOneMenu value="#{aux.disciplina}"
 							converter="converterDisciplina" style="width:100%">
-							<f:selectItem itemValue="" itemLabel="Selecione uma Disciplina" />
+							<f:selectItem itemValue="" itemLabel="#{msg['pages.cadastroPergunta.disciplina.msg']}" />
 							<f:selectItems value="#{perguntaManagedBean.disciplinas}"
-								var="f" itemValue="#{f}" itemLabel="#{f.nome}" />
+								var="x" itemValue="#{x}" itemLabel="#{x.nome}" />
 						</p:selectOneMenu>
 
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
-      <p:column headerText="Nivel Pergunta">
-        <p:outputLabel value="#{aux.nivel}" />
+       <p:column headerText="#{msg['pages.cadastroPergunta.nivel']}" filterBy="#{aux.nivel}">
+       			 <p:cellEditor>
+					<f:facet name="output">
+						<p:outputLabel value="#{aux.nivel}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="perguntaNivel" value="#{aux.nivel}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
       </p:column>
       
        <p:column style="width:70px" headerText="#{msg['pages.cadastroPergunta.optionTable']}">
@@ -81,9 +115,9 @@
 					
 					<p:commandLink id="remover" styleClass="ui-icon ui-icon-trash"
 						style="text-align:center"
-						actionListener="#{perguntaManagedBean.remove(aux)}"
+						actionListener="#{perguntaManagedBean.remover(aux)}"
 						update="tabelaPergunta" />
-	  </p:column>  
+	  </p:column>
    </p:dataTable>	
 	   
 	</ui:define>

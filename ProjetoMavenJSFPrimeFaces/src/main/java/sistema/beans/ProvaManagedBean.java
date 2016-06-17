@@ -3,6 +3,8 @@ package sistema.beans;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.primefaces.event.RowEditEvent;
@@ -57,7 +59,6 @@ public class ProvaManagedBean {
 			provas.add(prova);
 
 		prova = new Prova();
-
 	}
 	
 	public void gerar(Prova prova) throws IOException
@@ -65,7 +66,7 @@ public class ProvaManagedBean {
 		int count = 1;
 		PDFWithText p  = new PDFWithText();
 		
-		List<Pergunta> lista = pservice.getPerguntas();
+		List<Pergunta> lista = pservice.getPerguntas(prova.getNivelProva());
 		p.createPDF(lista, prova.getNome(), prova.getQtdePerguntas());
 		prova = new Prova();
 	}	
@@ -82,8 +83,15 @@ public class ProvaManagedBean {
 	public List<Prova> getProvas() {
 		if (provas == null)
 			provas = service.getProvas();
-
-		return provas;
+		
+		List<Prova> aux = new ArrayList<Prova>();
+		
+		Stream <? extends Prova> stream = provas.
+				 stream().
+				 filter( s -> s.getNome() != null );
+		stream.forEach(p -> aux.add(p));
+		
+		return aux;
 	}
 
 	public void remover(Prova prova) {

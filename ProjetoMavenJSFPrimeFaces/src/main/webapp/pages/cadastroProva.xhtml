@@ -89,7 +89,6 @@
 				</p:cellEditor>
       </p:column>   
         	 <p:column headerText="#{msg['pages.cadastroProva.nivelProva']}" filterBy="#{aux.nivelProva}">
-    
     			<p:cellEditor>
 					<f:facet name="output">
 						<p:outputLabel value="#{aux.nivelProva}" />
@@ -103,7 +102,16 @@
       
 		 
         	 <p:column headerText="#{msg['pages.cadastroProva.qtdePerguntas']}" filterBy="#{aux.qtdePerguntas}">
+						
+						<p:cellEditor>
+					<f:facet name="output">
 						<p:outputLabel value="#{aux.qtdePerguntas}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="provaQtde" value="#{aux.qtdePerguntas}"
+							style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
 	  			</p:column>
       
       <p:column style="width:70px" headerText="#{msg['pages.cadastroProva.optionTable']}">

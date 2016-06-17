@@ -10,12 +10,15 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import org.primefaces.event.RowEditEvent;
+
 import sistema.modelos.Aluno;
 import sistema.modelos.Conteudo;
 import sistema.modelos.Disciplina;
 import sistema.modelos.Pergunta;
 import sistema.modelos.Produto;
 import sistema.modelos.Professor;
+import sistema.modelos.Prova;
 import sistema.service.AlunoService;
 import sistema.service.ConteudoService;
 import sistema.service.PerguntaService;
@@ -50,24 +53,10 @@ public class PerguntaManagedBean {
 		this.perguntas = perguntas;
 	}
 	
-	public List<Pergunta> getPerguntas(Disciplina d, Conteudo c, int quant)
-	{
-		Pergunta p = new Pergunta();
-		
-		EntityManagerFactory emf= Persistence.createEntityManagerFactory("ProjetoMavenJSFPrimeFaces");
-		EntityManager em = emf.createEntityManager( );
-		
-		Query q = em.createQuery("SELECT c FROM Pergunta AS c where c.Titulo != ?1 and c.disciplina.Id = ?2");
-		q.setParameter(1,"").setParameter(2, d.getidDisciplina());
-		q.setMaxResults(quant);
-	   
-		@SuppressWarnings("unchecked")
-		List<Pergunta> lista = q.getResultList();
-	    
-		em.close();
-	    emf.close();
-	    
-	    return lista;		
+	// Edição de um prova na tabela
+	public void onRowEdit(RowEditEvent event) {
+		Pergunta a = ((Pergunta) event.getObject());
+		service.alterar(a);
 	}
 	
 	public Conteudo getConteudo() {
@@ -89,12 +78,17 @@ public class PerguntaManagedBean {
 	public String salvar()
 	{
 		pergunta.addConteudo(conteudo);
+		pergunta.setDisciplina(disciplina);
 		service.salvar(pergunta);
+		
+		if(perguntas != null)
+			perguntas.add(pergunta);
+		
 		pergunta = new Pergunta();
 		return null;
 	}
 
-	public void remove(Pergunta pergunta) {
+	public void remover(Pergunta pergunta) {
 		service.remover(pergunta);
 		perguntas.remove(pergunta);
 	}

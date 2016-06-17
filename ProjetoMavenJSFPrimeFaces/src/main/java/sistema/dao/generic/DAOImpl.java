@@ -58,7 +58,12 @@ public abstract class DAOImpl <T, I extends Serializable> {
 		return getEntityManager().createQuery("select o from " + classe.getSimpleName() + " o").getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<T> getAll(Class<T> classe, int nivel) {
 
+		return getEntityManager().createQuery("select o from " + classe.getSimpleName() + " o where o.nivel = " + nivel).getResultList();
+	}
+ 
 	public EntityManager getEntityManager() {
 	  
 	 if(em == null)

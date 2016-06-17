@@ -21,6 +21,13 @@ public class PerguntaService {
 		
 	}
 	
+	public List <Pergunta> getPerguntas(int perguntanivel)
+	{
+		List <Pergunta> list = perguntaDAO.getAll(Pergunta.class, perguntanivel);
+		perguntaDAO.closeEntityManager();
+		return list;
+	}
+	
 	public List <Pergunta> getPerguntas()
 	{
 		List <Pergunta> list = perguntaDAO.getAll(Pergunta.class);
